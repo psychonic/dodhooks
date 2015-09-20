@@ -3,8 +3,12 @@
 
 #include <IBinTools.h>
 
-#include "smsdk_ext.h"
-#include "CDetour/detours.h"
+#include <smsdk_ext.h>
+#include <CDetour/detours.h>
+
+#define g_pGameHelpers gamehelpers
+#define g_pEngine engine
+#define g_pGameConfs gameconfs
 
 extern IGameConfig *g_pGameConf;
 extern IGameConfig *g_pGameConfSDKTools;
