@@ -27,7 +27,6 @@ IForward *g_pFwdPlayerState			= NULL;
 IForward *g_pFwdBombTargetState		= NULL;
 
 IGameConfig *g_pGameConf = NULL;
-IGameConfig *g_pGameConfSDKTools = NULL;
 
 ICvar *g_pCvar = NULL;
 ConCommand *g_pKillCmd = NULL;
@@ -35,6 +34,7 @@ ConCommand *g_pKillCmd = NULL;
 CGlobalVars *g_pGlobals = NULL;
 
 IBinTools *g_pBinTools = NULL;
+ISDKTools *g_pSDKTools = NULL;
 
 IServerGameEnts *g_pGameEnts = NULL;
 IServerGameClients *g_pGameClients = NULL;
@@ -224,6 +224,7 @@ void CDODHooks::OnSetCommandClient(int client)
 bool CDODHooks::SDK_OnLoad(char *error, size_t maxlength, bool late)
 {
 	sharesys->AddDependency(myself, "bintools.ext", true, true);
+	sharesys->AddDependency(myself, "sdktools.ext", true, true);
 	sharesys->AddNatives(myself, g_Natives);
 
 	char szConfigError[255] = "";
@@ -233,16 +234,6 @@ bool CDODHooks::SDK_OnLoad(char *error, size_t maxlength, bool late)
 		if (szConfigError[0])
 		{
 			snprintf(error, maxlength, "Fatal Error: Unable to open file: \"dodhooks.txt\" - %s", szConfigError);
-		}
-
-		return false;
-	}
-
-	if (!g_pGameConfs->LoadGameConfigFile("sdktools.games", &g_pGameConfSDKTools, szConfigError, sizeof(szConfigError)))
-	{
-		if (szConfigError[0])
-		{
-			snprintf(error, maxlength, "Fatal Error: Unable to open file: \"sdktools.games.txt\" - %s", szConfigError);
 		}
 
 		return false;
@@ -270,7 +261,6 @@ void CDODHooks::SDK_OnUnload()
 	SH_REMOVE_HOOK_STATICFUNC(ConCommand, Dispatch, g_pKillCmd, OnKillCommand, false);
 
 	g_pGameConfs->CloseGameConfigFile(g_pGameConf);
-	g_pGameConfs->CloseGameConfigFile(g_pGameConfSDKTools);
 	
 	g_pForwards->ReleaseForward(g_pFwdVoiceCommand);
 	g_pForwards->ReleaseForward(g_pFwdJoinClass);
@@ -296,6 +286,7 @@ void CDODHooks::SDK_OnUnload()
 void CDODHooks::SDK_OnAllLoaded()
 {
 	SM_GET_LATE_IFACE(BINTOOLS, g_pBinTools);
+	SM_GET_LATE_IFACE(SDKTOOLS, g_pSDKTools);
 
 	if (!g_pBinTools)
 	{

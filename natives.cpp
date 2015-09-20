@@ -452,12 +452,7 @@ cell_t Native_AddWaveTime(IPluginContext *pContext, const cell_t *Params)
 			pWrapper = g_pBinTools->CreateCall(pAddress, CallConv_ThisCall, NULL, Pass, 2));
 	}
 	
-	if (!g_pGameRules)
-	{
-		return pContext->ThrowNativeError("g_pGameRules is NULL");
-	}
-
-	void *pGameRules = *g_pGameRules;
+	void *pGameRules = g_pSDKTools->GetGameRules();
 
 	if (!pGameRules)
 	{
@@ -501,12 +496,7 @@ cell_t Native_SetWinningTeam(IPluginContext *pContext, const cell_t *Params)
 			pWrapper = g_pBinTools->CreateCall(pAddress, CallConv_ThisCall, NULL, Pass, 1));
 	}
 
-	if (!g_pGameRules)
-	{
-		return pContext->ThrowNativeError("g_pGameRules is NULL");
-	}
-
-	void *pGameRules = *g_pGameRules;
+	void *pGameRules = g_pSDKTools->GetGameRules();
 
 	if (!pGameRules)
 	{
@@ -542,12 +532,7 @@ cell_t Native_SetRoundState(IPluginContext *pContext, const cell_t *Params)
 			pWrapper = g_pBinTools->CreateCall(pAddress, CallConv_ThisCall, NULL, Pass, 1));
 	}
 
-	if (!g_pGameRules)
-	{
-		return pContext->ThrowNativeError("g_pGameRules is NULL");
-	}
-
-	void *pGameRules = *g_pGameRules;
+	void *pGameRules = g_pSDKTools->GetGameRules();
 
 	if (!pGameRules)
 	{

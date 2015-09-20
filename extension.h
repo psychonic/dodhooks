@@ -2,6 +2,7 @@
 #define _INCLUDE_SOURCEMOD_EXTENSION_PROPER_H_
 
 #include <IBinTools.h>
+#include <ISDKTools.h>
 
 #include <smsdk_ext.h>
 #include <CDetour/detours.h>
@@ -11,11 +12,11 @@
 #define g_pGameConfs gameconfs
 
 extern IGameConfig *g_pGameConf;
-extern IGameConfig *g_pGameConfSDKTools;
 
 extern CGlobalVars *g_pGlobals;
 
 extern IBinTools *g_pBinTools;
+extern ISDKTools *g_pSDKTools;
 
 extern IServerGameEnts *g_pGameEnts;
 
@@ -38,7 +39,6 @@ extern uint32 g_iOffset_TimerEndTime;
 
 extern void *g_pEntList;
 
-extern void **g_pGameRules;
 extern void **g_pObjectiveResource;
 
 #define DOD_MAXPLAYERS 33

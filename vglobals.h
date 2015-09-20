@@ -3,7 +3,6 @@
 
 extern void *g_pEntList;
 
-extern void **g_pGameRules;
 extern void **g_pObjectiveResource;
 
 void InitializeValveGlobals();
