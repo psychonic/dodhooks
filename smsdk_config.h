@@ -40,7 +40,7 @@
 /* Basic information exposed publicly */
 #define SMEXT_CONF_NAME			"DoD Hooks"
 #define SMEXT_CONF_DESCRIPTION	"Detours & Natives for DoD:S"
-#define SMEXT_CONF_VERSION		"1.4.1-2015"
+#define SMEXT_CONF_VERSION		"1.4.1-2015b"
 #define SMEXT_CONF_AUTHOR		"Andersso"
 #define SMEXT_CONF_URL			"http://www.dodsplugins.com/"
 #define SMEXT_CONF_LOGTAG		"DODH"
