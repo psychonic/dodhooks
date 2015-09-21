@@ -30,6 +30,7 @@ IGameConfig *g_pGameConf = NULL;
 
 ICvar *g_pCvar = NULL;
 ConCommand *g_pKillCmd = NULL;
+INetworkStringTableContainer *netstringtables = NULL;
 
 CGlobalVars *g_pGlobals = NULL;
 
@@ -335,6 +336,7 @@ bool CDODHooks::SDK_OnMetamodLoad(SourceMM::ISmmAPI *ismm, char *error, size_t m
 	GET_V_IFACE_CURRENT(GetEngineFactory, g_pCvar, ICvar, CVAR_INTERFACE_VERSION);
 	GET_V_IFACE_CURRENT(GetServerFactory, g_pGameEnts, IServerGameEnts, INTERFACEVERSION_SERVERGAMEENTS);
 	GET_V_IFACE_ANY(GetServerFactory, g_pGameClients, IServerGameClients, INTERFACEVERSION_SERVERGAMECLIENTS);
+	GET_V_IFACE_ANY(GetEngineFactory, netstringtables, INetworkStringTableContainer, INTERFACENAME_NETWORKSTRINGTABLESERVER);
 
 	g_pGlobals = ismm->GetCGlobals();
 

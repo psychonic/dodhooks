@@ -39,18 +39,6 @@
 				"windows"	"\x55\x8B\xEC\x53\x56\x57\x8B\xF9\x8D\x8F\x24\x11\x00\x00\xE8"
 				"linux"		"@_ZN10CDODPlayer9PopHelmetE6VectorS0_"
 			}
-			"PrecacheMaterial"
-			{
-				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x55\x08\x8B\x01\x8B"
-				"linux"		"@_Z16PrecacheMaterialPKc"
-			}
-			"GetMaterialIndex"
-			{
-				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x56\x8B\x75\x08\x85\xF6\x74\x24\x8B\x0D\x2A\x2A\x2A\x2A\x8B\x01\x8B\x50"
-				"linux"		"@_Z16GetMaterialIndexPKc"
-			}
 			"SetWinningTeam"
 			{
 				"library"	"server"

@@ -7,6 +7,8 @@
 #include <smsdk_ext.h>
 #include <CDetour/detours.h>
 
+#include <networkstringtabledefs.h>
+
 #define g_pGameHelpers gamehelpers
 #define g_pEngine engine
 #define g_pGameConfs gameconfs
@@ -21,6 +23,8 @@ extern ISDKTools *g_pSDKTools;
 extern IServerGameEnts *g_pGameEnts;
 
 extern CSharedEdictChangeInfo *g_pSharedChangeInfo;
+
+extern INetworkStringTableContainer *netstringtables;
 
 extern uint32 g_iOffset_PlayerClass;
 extern uint32 g_iOffset_DesiredPlayerClass;

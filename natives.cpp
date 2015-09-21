@@ -145,62 +145,24 @@ cell_t Native_SetNumControlPoints(IPluginContext *pContext, const cell_t *Params
 
 void PrecacheMaterial(const char *szMaterialName)
 {
-	static ICallWrapper *pWrapper = NULL;
+	// Don't cache this unless also hooking CreateNetworkStringTables on gamedll iface.
+	// They get destroyed and recreated there at map change.
+	INetworkStringTable *pTable = netstringtables->FindTable("Materials");
 
-	if (!pWrapper)
-	{
-		void *pAddress;
-
-		if (!g_pGameConf->GetMemSig("PrecacheMaterial", &pAddress) || !pAddress)
-		{
-			return;
-		}
-
-		PassInfo Pass[1];
-
-		Pass[0].flags = PASSFLAG_BYVAL;
-		Pass[0].size = sizeof(const char *);
-		Pass[0].type = PassType_Basic;
-
-		pWrapper = g_pBinTools->CreateCall(pAddress, CallConv_Cdecl, NULL, Pass, 1);
-	}
-	
-	pWrapper->Execute(&szMaterialName, NULL);
+	pTable->AddString(true, szMaterialName);
 }
 
 int GetMaterialIndex(const char *pMaterialName)
 {
-	static ICallWrapper *pWrapper = NULL;
+	// Don't cache this unless also hooking CreateNetworkStringTables on gamedll iface.
+	// They get destroyed and recreated there at map change.
+	INetworkStringTable *pTable = netstringtables->FindTable("Materials");
 
-	if (!pWrapper)
-	{
-		void *pAddress;
-
-		if (!g_pGameConf->GetMemSig("GetMaterialIndex", &pAddress) || !pAddress)
-		{
-			return 0;
-		}
-
-		PassInfo Pass[1];
-
-		Pass[0].flags = PASSFLAG_BYVAL;
-		Pass[0].size = sizeof(const char *);
-		Pass[0].type = PassType_Basic;
-
-		PassInfo Ret[1];
-
-		Ret[0].flags = PASSFLAG_BYVAL;
-		Ret[0].size = sizeof(int);
-		Ret[0].type = PassType_Basic;
-
-		pWrapper = g_pBinTools->CreateCall(pAddress, CallConv_Cdecl, Ret, Pass, 1);
-	}
-	
-	int iIndex = -1;
-
-	pWrapper->Execute(&pMaterialName, &iIndex);
-
-	return iIndex;
+	int idx = pTable->FindStringIndex(pMaterialName);
+	if (idx == INVALID_STRING_INDEX)
+		return 0;
+	else
+		return idx;
 }
 
 cell_t Native_PrecacheCPIcon(IPluginContext *pContext, const cell_t *Params)
